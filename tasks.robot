@@ -26,7 +26,7 @@ Order the robots from RobotSpareBin Industries Inc
 
 *** Keywords ***
 Open the robot order website
-    Open Available Browser     url=https://robotsparebinindustries.com/#/robot-order
+    Open Available Browser    https://robotsparebinindustries.com/#/robot-order
     Maximize Browser Window
     Close the annoying modal
 
@@ -34,7 +34,7 @@ Close the annoying modal
     Click Button When Visible    //button[@class='btn btn-danger']
 
 Download the order file
-    Download    ${ordersFile}    #overwrite=${True}
+    Download    ${ordersFile}    
 
 Fill the form using the data from csv file
     Set up directories
@@ -52,6 +52,7 @@ Fill the form using the data from csv file
         Close the annoying modal
     END     
     Create a ZIP file of receipt PDF files
+    [Teardown]    Cleanup temporary PDF directory
 
 Fill the form for one order
     [Arguments]                  ${order_Robot}
